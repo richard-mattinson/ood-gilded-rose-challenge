@@ -12,7 +12,7 @@ Conjured
 - "Conjured Mana Cake"
 */
 
-const {Shop, Item} = require('../src/gilded_rose.js');
+const {Shop, Common, Special, Legendary, Conjured} = require('../src/gilded_rose.js');
 describe("Gilded Rose", function() {
 
 // -------- COMMON ITEM TESTS --------
@@ -20,7 +20,7 @@ describe("Gilded Rose", function() {
     // setup
     const expectedSellIn = 4
     const expectedQuality = 6
-    const gildedRose = new Shop([ new Item("Elixir of the Mongoose", 5, 7) ]);
+    const gildedRose = new Shop([ new Common("Elixir of the Mongoose", 5, 7) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute
@@ -32,7 +32,7 @@ describe("Gilded Rose", function() {
     // setup
     const expectedSellIn = -1
     const expectedQuality = 8
-    const gildedRose = new Shop([ new Item("+5 Dexterity Vest", 0, 10) ]);
+    const gildedRose = new Shop([ new Common("+5 Dexterity Vest", 0, 10) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute
@@ -127,11 +127,11 @@ describe("Gilded Rose", function() {
   });
 
 // -------- LEGENDARY ITEM TESTS --------
-  it("legendary item - maintain both sellIn and quality", function() {
+  fit("legendary item - maintain both sellIn and quality", function() {
     // setup
     const expectedSellIn = 0
     const expectedQuality = 80
-    const gildedRose = new Shop([ new Item("Sulfuras, Hand of Ragnaros", 0, 80) ]);
+    const gildedRose = new Shop([ new Legendary("Sulfuras, Hand of Ragnaros", 0, 80) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute
