@@ -12,7 +12,7 @@ Conjured
 - "Conjured Mana Cake"
 */
 
-const {Shop, Common, Special, Legendary, Conjured} = require('../src/gilded_rose.js');
+const {Shop, Common, SpecialCheese, SpecialPass, Legendary, Conjured} = require('../src/gilded_rose.js');
 describe("Gilded Rose", function() {
 
 // -------- COMMON ITEM TESTS --------
@@ -127,7 +127,7 @@ describe("Gilded Rose", function() {
   });
 
 // -------- LEGENDARY ITEM TESTS --------
-  fit("legendary item - maintain both sellIn and quality", function() {
+  it("legendary item - maintain both sellIn and quality", function() {
     // setup
     const expectedSellIn = 0
     const expectedQuality = 80
@@ -141,11 +141,11 @@ describe("Gilded Rose", function() {
 
 // --------- CONJURED ITEM TESTS --------
 
-  it("conjured item | -1 sellin, -2 quality when day > 0", function() {
+  fit("conjured item | -1 sellin, -2 quality when day > 0", function() {
     // setup
     const expectedSellIn = 2
     const expectedQuality = 14
-    const gildedRose = new Shop([ new Item("Conjured Mana Cake", 3, 16) ]);
+    const gildedRose = new Shop([ new Conjured("Conjured Mana Cake", 3, 16) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute
@@ -153,11 +153,11 @@ describe("Gilded Rose", function() {
     expect(items[0].sellIn).toEqual(expectedSellIn);
   });
 
-  it("conjured item | -1 sellin, -4 quality when day < 0", function() {
+  fit("conjured item | -1 sellin, -4 quality when day < 0", function() {
     // setup
     const expectedSellIn = -1
     const expectedQuality = 2
-    const gildedRose = new Shop([ new Item("Conjured Mana Cake", 0, 6) ]);
+    const gildedRose = new Shop([ new Conjured("Conjured Mana Cake", 0, 6) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute

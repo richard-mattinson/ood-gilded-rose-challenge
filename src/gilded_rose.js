@@ -22,9 +22,33 @@ class Item {
 class Common extends Item {}
 
 // Special needs to be forked for Brie and Pass?
-class AgedCheese extends Item {}
+class SpecialCheese extends Item {
+    defaultBehavior(){
+      this.sellIn -= 1
+    if (this.sellIn <= 0) {
+      this.quality -= 2
+    } else {
+      this.quality -= 1
+    }
+    if (this.quality <= 0) {
+      this.quality = 0
+    }
+  }   
+}
 
-class Pass extends Item {}
+class SpecialPass extends Item {
+    defaultBehavior(){
+      this.sellIn -= 1
+    if (this.sellIn <= 0) {
+      this.quality -= 2
+    } else {
+      this.quality -= 1
+    }
+    if (this.quality <= 0) {
+      this.quality = 0
+    }
+  }   
+}
 
 // Legendary returns items unchanged (skip default behavior)
 class Legendary extends Item {
@@ -33,7 +57,19 @@ class Legendary extends Item {
 }
 
 // Conjured doubles both quality decline
-class Conjured extends Item {}
+class Conjured extends Item {
+    defaultBehavior(){
+      this.sellIn -= 1
+    if (this.sellIn <= 0) {
+      this.quality -= 4
+    } else {
+      this.quality -= 2
+    }
+    if (this.quality <= 0) {
+      this.quality = 0
+    }
+  }   
+}
 
 class Shop {
   constructor(items=[]){
@@ -127,7 +163,8 @@ class Shop {
 module.exports = {
   Item,
   Common,
-  Special,
+  SpecialCheese,
+  SpecialPass,
   Legendary,
   Conjured,
   Shop
