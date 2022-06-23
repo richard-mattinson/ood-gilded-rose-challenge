@@ -1,19 +1,18 @@
 class Item {
-  constructor(name, sellIn, quality){
+  constructor(name, sellIn, quality, rarity){
     this.name = name;
     this.sellIn = sellIn;
     this.quality = quality;
+    this.rarity = rarity;
   }
 }
-
-// 
 
 class Shop {
   constructor(items=[]){
     this.items = items;
   }
 
-  updatedConjuredItem(item) {
+  updatedConjuredItem(items) {
     item.sellIn -= 1
     if (item.sellIn < 0) {
       item.quality -= 4
@@ -26,9 +25,9 @@ class Shop {
   }
 
   updateQuality() {
-    for (var i = 0; i < this.items.length; i++) {
+    for (let i = 0; i < this.items.length; i++) {
 
-      if(this.items[i].name == "Conjured Mana Cake") {
+      if (this.items[i].name === "Conjured Mana Cake") {
         this.updatedConjuredItem(this.items[i])
       }
       if (
@@ -73,6 +72,7 @@ class Shop {
         } else {
           if (this.items[i].quality < 50) {
             this.items[i].quality = this.items[i].quality + 1;
+        
           }
         }
       }
