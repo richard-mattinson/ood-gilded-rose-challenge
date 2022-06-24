@@ -41,12 +41,13 @@ describe("Gilded Rose", function() {
   });
 
 // -------- SPECIAL ITEM TESTS --------
-  
+
+// ---- AGED BRIE TESTS ----
   it("special item | does not exceed 50 quality", function() {
     // setup
     const expectedSellIn = -25
     const expectedQuality = 50
-    const gildedRose = new Shop([ new Item("Aged Brie", -24, 50) ]);
+    const gildedRose = new Shop([ new SpecialCheese("Aged Brie", -24, 50) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute
@@ -58,7 +59,7 @@ describe("Gilded Rose", function() {
     // setup
     const expectedSellIn = 1
     const expectedQuality = 1
-    const gildedRose = new Shop([ new Item("Aged Brie", 2, 0) ]);
+    const gildedRose = new Shop([ new SpecialCheese("Aged Brie", 2, 0) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute
@@ -70,7 +71,7 @@ describe("Gilded Rose", function() {
     // setup
     const expectedSellIn = -2
     const expectedQuality = 6
-    const gildedRose = new Shop([ new Item("Aged Brie", -1, 4) ]);
+    const gildedRose = new Shop([ new SpecialCheese("Aged Brie", -1, 4) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute
@@ -78,11 +79,12 @@ describe("Gilded Rose", function() {
     expect(items[0].sellIn).toEqual(expectedSellIn);
   });
 
+// ---- BACKSTAGE TESTS ----
   it("special item: Backstage Pass | -1 sellIn, +1 quality when sellin > 10", function() {
     // setup
     const expectedSellIn = 14
     const expectedQuality = 21
-    const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20) ]);
+    const gildedRose = new Shop([ new SpecialPass("Backstage passes to a TAFKAL80ETC concert", 15, 20) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute
@@ -90,11 +92,11 @@ describe("Gilded Rose", function() {
     expect(items[0].sellIn).toEqual(expectedSellIn);
   });
 
-  it("special item: Backstage Pass | -1 sellIn, +2 quality when sellin < 10", function() {
+  it("special item: Backstage Pass | -1 sellIn, +2 quality when sellin <= 10 & > 5", function() {
     // setup
     const expectedSellIn = 9
     const expectedQuality = 27
-    const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 10, 25) ]);
+    const gildedRose = new Shop([ new SpecialPass("Backstage passes to a TAFKAL80ETC concert", 10, 25) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute
@@ -102,11 +104,11 @@ describe("Gilded Rose", function() {
     expect(items[0].sellIn).toEqual(expectedSellIn);
   });
 
-  it("special item: Backstage Pass | -1 sellIn, +3 quality when sellin < 5", function() {
+  it("special item: Backstage Pass | -1 sellIn, +3 quality when sellin <= 5 & > 0", function() {
     // setup
     const expectedSellIn = 4
     const expectedQuality = 38
-    const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 5, 35) ]);
+    const gildedRose = new Shop([ new SpecialPass("Backstage passes to a TAFKAL80ETC concert", 5, 35) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute
@@ -118,7 +120,7 @@ describe("Gilded Rose", function() {
     // setup
     const expectedSellIn = -1
     const expectedQuality = 0
-    const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 0, 50) ]);
+    const gildedRose = new Shop([ new SpecialPass("Backstage passes to a TAFKAL80ETC concert", 0, 50) ]);
     // verify
     const items = gildedRose.updateQuality();
     // execute
@@ -141,7 +143,7 @@ describe("Gilded Rose", function() {
 
 // --------- CONJURED ITEM TESTS --------
 
-  fit("conjured item | -1 sellin, -2 quality when day > 0", function() {
+  it("conjured item | -1 sellin, -2 quality when day > 0", function() {
     // setup
     const expectedSellIn = 2
     const expectedQuality = 14
@@ -153,7 +155,7 @@ describe("Gilded Rose", function() {
     expect(items[0].sellIn).toEqual(expectedSellIn);
   });
 
-  fit("conjured item | -1 sellin, -4 quality when day < 0", function() {
+  it("conjured item | -1 sellin, -4 quality when day < 0", function() {
     // setup
     const expectedSellIn = -1
     const expectedQuality = 2
